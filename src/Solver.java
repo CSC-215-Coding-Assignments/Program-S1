@@ -59,13 +59,10 @@ public class Solver {
             }
             createChildren(item);
         }
-
-        //While queue is not empty, add to hashset, check if it is a solution, if it is, then go to solutionFound(), otherwise create children
         return null;
     }
 
     public static void createChildren(State parent) {
-        //Systematically creating children, checking if they are in hashset, if not, then add to queue
         for (int i = 0; i < sizes.length - 1; i++) {
             for (int j = i + 1; j < sizes.length; j++) {
                 State a = new State(parent, i, j), b = new State(parent, j, i);
