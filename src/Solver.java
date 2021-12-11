@@ -17,12 +17,7 @@ public class Solver {
 
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-
-        String line = scanner.nextLine();
-        String[] values = line.split(" ");
-        System.out.println(Arrays.toString(values));
+        solve(new File("resources/input6.txt"));
     }
 
     public static void solve(File file) {
@@ -41,24 +36,24 @@ public class Solver {
             e.printStackTrace();
         }
 
-        findSolution();
+        System.out.println(Arrays.toString(findSolution().cups));
     }
 
-    public static void findSolution() {
+    public static State findSolution() {
         queue.add(new State());
         while(!queue.isEmpty()){
             State item = queue.remove();
             A.add(item);
             for(int i: item.cups) {
                 if(i == varSize ){
-                    solutionFound(item);
-                    return;
+                    return item;
                 }
             }
             createChildren(item);
         }
 
         //While queue is not empty, add to hashset, check if it is a solution, if it is, then go to solutionFound(), otherwise create children
+        return null;
     }
 
     public static void createChildren(State parent) {
@@ -74,10 +69,6 @@ public class Solver {
                 }
             }
         }
-    }
-
-    public static void solutionFound(State state) {
-
     }
 
 
