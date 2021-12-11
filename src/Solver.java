@@ -18,11 +18,14 @@ public class Solver {
     public Solver(File file) {
         try {
             Scanner trialReader = new Scanner(file);
-            while(trialReader.hasNextLine()){
-               // for(int i = 0; i <
-
-
+            String values = new String(trialReader.nextLine());
+            String [] val = values.split(" ");
+            sizes = new int[val.length];
+            for (int i = 0; i < sizes.length; i++){
+                sizes [i] = Integer.parseInt(val[i]);
             }
+            varSize = trialReader.nextInt();
+
         }catch (FileNotFoundException e){
             System.out.println("Error");
             e.printStackTrace();
