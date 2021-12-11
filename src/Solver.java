@@ -10,7 +10,7 @@ public class Solver {
 
     HashSet<State> A = new HashSet<>();
     Queue<State> queue = new LinkedList<>();
-    //Queue of States (use as List<State>)
+
 
     static int[] sizes;
     static int varSize;
@@ -29,7 +29,19 @@ public class Solver {
         }
     }
 
-    public void findSolution(PrintStream out) {
+    public void findSolution() {
+        queue.add(new State());
+        while(!queue.isEmpty()){
+            State item = queue.remove();
+            A.add(item);
+            for(int i: item.cups) {
+                if(i == varSize ){
+                    solutionFound(item);
+                    return;
+                }
+            }
+            createChildren(item);
+        }
 
         //While queue is not empty, add to hashset, check if it is a solution, if it is, then go to solutionFound(), otherwise create children
     }
