@@ -8,9 +8,9 @@ import java.util.Scanner;
 
 public class Solver {
 
-    HashSet<State> A = new HashSet<>();
-    Queue<State> queue = new LinkedList<>();
-    //Queue of States (use as List<State>)
+    static HashSet<State> A = new HashSet<>();
+    static Queue<State> queue = new LinkedList<>();
+
 
     static int[] sizes;
     static int varSize;
@@ -32,12 +32,24 @@ public class Solver {
         }
     }
 
-    public void findSolution(PrintStream out) {
+    public static void findSolution() {
+        queue.add(new State());
+        while(!queue.isEmpty()){
+            State item = queue.remove();
+            A.add(item);
+            for(int i: item.cups) {
+                if(i == varSize ){
+                    solutionFound(item);
+                    return;
+                }
+            }
+            createChildren(item);
+        }
 
         //While queue is not empty, add to hashset, check if it is a solution, if it is, then go to solutionFound(), otherwise create children
     }
 
-    public void createChildren(State parent) {
+    public static void createChildren(State parent) {
         //Systematically creating children, checking if they are in hashset, if not, then add to queue
         for(int i = 0; i < sizes.length - 1; i++) {
             for(int j = i + 1; j < sizes.length; j++) {
@@ -52,12 +64,12 @@ public class Solver {
         }
     }
 
-    public void solutionFound(State state) {
+    public static void solutionFound(State state) {
 
     }
 
 
-    public class State {
+    public static class State {
         State parent;
         int[] cups;
         int from,to;
