@@ -50,12 +50,20 @@ public class Solver {
 
         public State(State parent, int from, int to) {
             this.parent = parent;
-            cups = new int[sizes.length];
+            cups = new int[parent.cups.length];
             this.from = from;
             this.to = to;
-            //Create a state that pours from parent, from form and to to.
 
+            System.arraycopy(parent.cups, 0, cups, 0, cups.length);
 
+            int amountTransferred = Math.min(sizes[to] - cups[to],cups[from]);
+            cups[from] -= amountTransferred;
+            cups[to] += amountTransferred;
+        }
+
+        public State() {
+            cups = new int[sizes.length];
+            cups[0] = sizes[0];
         }
 
         @Override
