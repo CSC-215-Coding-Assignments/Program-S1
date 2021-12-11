@@ -15,7 +15,17 @@ public class Solver {
     static int[] sizes;
     static int varSize;
 
-    public Solver(File file) {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+
+        String line = scanner.nextLine();
+        String[] values = line.split(" ");
+        System.out.println(Arrays.toString(values));
+    }
+
+    public static void solve(File file) {
         try {
             Scanner trialReader = new Scanner(file);
             String values = new String(trialReader.nextLine());
@@ -30,6 +40,8 @@ public class Solver {
             System.out.println("Error");
             e.printStackTrace();
         }
+
+        findSolution();
     }
 
     public static void findSolution() {
