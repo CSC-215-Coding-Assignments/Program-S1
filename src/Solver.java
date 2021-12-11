@@ -1,8 +1,9 @@
-import java.io.File;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Queue;
+import java.io.File;
+import java.util.Scanner;
 
 public class Solver {
 
@@ -10,10 +11,20 @@ public class Solver {
     //Queue of States (use as List<State>)
 
     static int[] sizes;
-
+    static int varSize;
 
     public Solver(File file) {
-        //set up sizes
+        try {
+            Scanner trialReader = new Scanner(file);
+            while(trialReader.hasNextLine()){
+               // for(int i = 0; i <
+
+
+            }
+        }catch (FileNotFoundException e){
+            System.out.println("Error");
+            e.printStackTrace();
+        }
     }
 
     public void findSolution(PrintStream out) {
