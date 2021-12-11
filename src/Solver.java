@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class Solver {
 
-
+// We created the HashSet and the Queue which created the LinkedList for the int cup and target sizes
     static final HashSet<State> VISITED_STATES = new HashSet<>();
     static final Queue<State> UNVISITED_STATES = new LinkedList<>();
 
