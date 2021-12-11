@@ -4,8 +4,8 @@ import java.util.*;
 
 public class Solver {
 
-    static HashSet<State> A = new HashSet<>();
-    static Queue<State> queue = new LinkedList<>();
+    static final HashSet<State> A = new HashSet<>();
+    static final Queue<State> queue = new LinkedList<>();
 
     static int[] sizes;
     static int varSize;
@@ -81,9 +81,9 @@ public class Solver {
 
     public static class State {
 
-        State parent;
-        int[] cups;
-        int from, to;
+        final State parent;
+        final int[] cups;
+        final int from, to;
 
         public State(State parent, int from, int to) {
             this.parent = parent;
@@ -101,6 +101,9 @@ public class Solver {
         public State() {
             cups = new int[sizes.length];
             cups[0] = sizes[0];
+            parent = null;
+            from = 0;
+            to = 0;
         }
 
         @Override
