@@ -1,10 +1,6 @@
 import java.io.*;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 import java.io.File;
-import java.util.Scanner;
 
 public class Solver {
 
@@ -36,7 +32,22 @@ public class Solver {
             e.printStackTrace();
         }
 
-        System.out.println(Arrays.toString(findSolution().cups));
+        Stack<State> solutionStack = new Stack<>();
+
+        State solution = findSolution();
+        if(solution != null) {
+            while(solution.parent != null) {
+                solutionStack.add(solution);
+                solution = solution.parent;
+            }
+
+            while(!solutionStack.isEmpty()) {
+                State i = solutionStack.pop();
+                System.out.println(i.from + " " + i.to);
+            }
+        } else {
+            System.out.println("NOT POSSIBLE");
+        }
     }
 
     public static State findSolution() {
