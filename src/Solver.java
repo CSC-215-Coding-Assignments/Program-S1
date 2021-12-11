@@ -105,6 +105,12 @@ public class Solver {
         }
     }
 
+    /**
+     * Indicates a state of the problem.
+     * "parent" indicates the state that it came from.
+     * "from" and "to" are stored values that indicate the step that was just taken to get to this point.
+     * "cups" is the current state as an array of integers (the values in each cup)
+     */
     public static class State {
 
         final State parent;
@@ -117,8 +123,10 @@ public class Solver {
             this.from = from;
             this.to = to;
 
+            //Copy parent's array to this state
             System.arraycopy(parent.cups, 0, cups, 0, cups.length);
 
+            //Only transfer the minimum value between the amount in the "from" cup, and the remaining amount in the "to" cup
             int amountTransferred = Math.min(CUP_SIZES[to] - cups[to], cups[from]);
             cups[from] -= amountTransferred;
             cups[to] += amountTransferred;
