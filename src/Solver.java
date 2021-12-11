@@ -10,7 +10,9 @@ import java.util.*;
  */
 public class Solver {
 
-// We created the HashSet and the Queue which created the LinkedList for the int cup and target sizes
+    /*
+    We created the HashSet and the Queue which created the LinkedList for the int cup and target sizes
+     */
     static final HashSet<State> VISITED_STATES = new HashSet<>();
     static final Queue<State> UNVISITED_STATES = new LinkedList<>();
 
@@ -64,7 +66,12 @@ public class Solver {
             System.out.println("NOT POSSIBLE");
         }
     }
-// Creates the original state and adds it to the Queue. While the Queue is not empty it wil take the next item from the queue and check if it's a valid solution. If it's not then it will create the children
+
+    /**
+     * Creates the original state and adds it to the Queue. While the Queue is not empty it wil take the next item from the queue and check if it's a
+     * valid solution. If it's not then it will create the children
+     * @return State that has the target value, null if no value was found
+     */
     public static State findSolution() {
         UNVISITED_STATES.add(new State());
         while (!UNVISITED_STATES.isEmpty()) {
