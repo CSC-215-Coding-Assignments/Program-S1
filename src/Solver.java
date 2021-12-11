@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Queue;
@@ -10,8 +11,8 @@ public class Solver {
     static int[] sizes;
 
 
-    public Solver(int[] sizes) {
-        this.sizes = sizes;
+    public Solver(File file) {
+        //set up sizes
     }
 
     public void findSolution(PrintStream out) {
