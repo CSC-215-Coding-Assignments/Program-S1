@@ -1,16 +1,14 @@
-import java.io.*;
-import java.util.*;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 public class Solver {
 
     static HashSet<State> A = new HashSet<>();
     static Queue<State> queue = new LinkedList<>();
 
-
     static int[] sizes;
     static int varSize;
-
 
     public static void main(String[] args) {
         solve(new File("resources/input6.txt"));
@@ -19,15 +17,14 @@ public class Solver {
     public static void solve(File file) {
         try {
             Scanner trialReader = new Scanner(file);
-            String values = new String(trialReader.nextLine());
-            String [] val = values.split(" ");
+            String values = trialReader.nextLine();
+            String[] val = values.split(" ");
             sizes = new int[val.length];
-            for (int i = 0; i < sizes.length; i++){
-                sizes [i] = Integer.parseInt(val[i]);
+            for (int i = 0; i < sizes.length; i++) {
+                sizes[i] = Integer.parseInt(val[i]);
             }
             varSize = trialReader.nextInt();
-
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("Error");
             e.printStackTrace();
         }
@@ -35,13 +32,13 @@ public class Solver {
         Stack<State> solutionStack = new Stack<>();
 
         State solution = findSolution();
-        if(solution != null) {
-            while(solution.parent != null) {
+        if (solution != null) {
+            while (solution.parent != null) {
                 solutionStack.add(solution);
                 solution = solution.parent;
             }
 
-            while(!solutionStack.isEmpty()) {
+            while (!solutionStack.isEmpty()) {
                 State i = solutionStack.pop();
                 System.out.println(i.from + " " + i.to);
             }
@@ -52,11 +49,11 @@ public class Solver {
 
     public static State findSolution() {
         queue.add(new State());
-        while(!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             State item = queue.remove();
             A.add(item);
-            for(int i: item.cups) {
-                if(i == varSize ){
+            for (int i : item.cups) {
+                if (i == varSize) {
                     return item;
                 }
             }
@@ -69,24 +66,24 @@ public class Solver {
 
     public static void createChildren(State parent) {
         //Systematically creating children, checking if they are in hashset, if not, then add to queue
-        for(int i = 0; i < sizes.length - 1; i++) {
-            for(int j = i + 1; j < sizes.length; j++) {
-                State a = new State(parent,i,j), b = new State(parent,j,i);
-                if(!A.contains(a)) {
+        for (int i = 0; i < sizes.length - 1; i++) {
+            for (int j = i + 1; j < sizes.length; j++) {
+                State a = new State(parent, i, j), b = new State(parent, j, i);
+                if (!A.contains(a)) {
                     queue.add(a);
                 }
-                if(!A.contains(b)) {
+                if (!A.contains(b)) {
                     queue.add(b);
                 }
             }
         }
     }
 
-
     public static class State {
+
         State parent;
         int[] cups;
-        int from,to;
+        int from, to;
 
         public State(State parent, int from, int to) {
             this.parent = parent;
@@ -96,7 +93,7 @@ public class Solver {
 
             System.arraycopy(parent.cups, 0, cups, 0, cups.length);
 
-            int amountTransferred = Math.min(sizes[to] - cups[to],cups[from]);
+            int amountTransferred = Math.min(sizes[to] - cups[to], cups[from]);
             cups[from] -= amountTransferred;
             cups[to] += amountTransferred;
         }
@@ -107,6 +104,11 @@ public class Solver {
         }
 
         @Override
+        public int hashCode() {
+            return Arrays.hashCode(cups);
+        }
+
+        @Override
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
@@ -114,11 +116,6 @@ public class Solver {
             State state = (State) o;
 
             return Arrays.equals(cups, state.cups);
-        }
-
-        @Override
-        public int hashCode() {
-            return Arrays.hashCode(cups);
         }
     }
 }
