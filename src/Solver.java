@@ -19,6 +19,10 @@ public class Solver {
     static int[] CUP_SIZES;
     static int TARGET_SIZE;
 
+    /**
+     * Change file name to each individual test case
+     * @param args
+     */
     public static void main(String[] args) {
         solve(new File("resources/input6.txt"));
     }
