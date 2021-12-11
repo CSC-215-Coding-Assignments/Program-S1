@@ -1,10 +1,11 @@
 import java.io.PrintStream;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Queue;
 
 public class Solver {
 
-    //HashSet of State
+    HashSet<State> A = new HashSet<>();
     //Queue of States (use as List<State>)
 
     static int[] sizes;
