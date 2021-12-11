@@ -21,6 +21,13 @@ public class Solver {
         solve(new File("resources/input6.txt"));
     }
 
+    /**
+     * Solve reads in the file and stores how many cups there are using the Scanner class
+     * It stores the amount of cups in CUP_SIZE
+     * Solve also stores the wanted cup amount in  TARGET_SIZE
+     *
+     * @param file
+     */
     public static void solve(File file) {
         try {
             Scanner trialReader = new Scanner(file);
@@ -36,6 +43,10 @@ public class Solver {
             e.printStackTrace();
         }
 
+        /**
+         * solutionStack is used to reverse the order of the possible combinations so the answer is printed last instead of first
+         * If there is no solution, prints NOT POSSIBLE when there is no solution
+         */
         Stack<State> solutionStack = new Stack<>();
 
         State solution = findSolution();
