@@ -53,7 +53,7 @@ public class Solver {
             System.out.println("NOT POSSIBLE");
         }
     }
-
+// Creates the original state and adds it to the Queue. While the Queue is not empty it wil take the next item from the queue and check if it's a valid solution. If it's not then it will create the children
     public static State findSolution() {
         UNVISITED_STATES.add(new State());
         while (!UNVISITED_STATES.isEmpty()) {
