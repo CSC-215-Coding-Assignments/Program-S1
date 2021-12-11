@@ -69,15 +69,19 @@ public class Solver {
         return null;
     }
 
+    /**
+     * Basically we just create children by testing all possible pairs of cups (that are not a cup and itself), and emulate a pour from one to
+     * another. We check if the HashSet contains that state. If it does not, then it will add that state to the unvisited queue
+     * @param parent Parent to create children from
+     */
     public static void createChildren(State parent) {
-        for (int i = 0; i < CUP_SIZES.length - 1; i++) {
-            for (int j = i + 1; j < CUP_SIZES.length; j++) {
-                State a = new State(parent, i, j), b = new State(parent, j, i);
-                if (!VISITED_STATES.contains(a)) {
-                    UNVISITED_STATES.add(a);
-                }
-                if (!VISITED_STATES.contains(b)) {
-                    UNVISITED_STATES.add(b);
+        for(int i = 0; i < CUP_SIZES.length; i++) {
+            for(int j = 0; j < CUP_SIZES.length; j++) {
+                if(i != j) {
+                    State state = new State(parent,i,j);
+                    if(!VISITED_STATES.contains(state)) {
+                        UNVISITED_STATES.add(state);
+                    }
                 }
             }
         }
@@ -110,19 +114,23 @@ public class Solver {
             to = 0;
         }
 
+        /**
+         * Overrides hash function to ignore the parent class from the hash function
+         * @return hash code based on the state array
+         */
         @Override
         public int hashCode() {
             return Arrays.hashCode(cups);
         }
 
+        /**
+         * Overrides the equals method (used in hashSet functions) such that the parent value is not checked to be equal
+         * @param o Object to check if equals
+         * @return True if the state is the same state, regardless of parent
+         */
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            State state = (State) o;
-
-            return Arrays.equals(cups, state.cups);
+            return o instanceof State && Arrays.equals(cups, ((State) o).cups);
         }
     }
 }
